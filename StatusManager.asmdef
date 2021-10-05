@@ -1,0 +1,20 @@
+﻿{
+	"name": "StatusManager",
+	"references": [
+        "GUID:40928bc94bf6c9d4ab69789b56aaff51",
+        "GUID:e695879245fa2de4a81d0b0f517b15c3",
+        "GUID:204f4bb9ab9458b8594c52ff421fad88",
+        "GUID:998584b5e7e280f358ffbba13265428b",
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:fede8c6c4e4bddd44b1db8410752c53f"
+    ],
+	"includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
