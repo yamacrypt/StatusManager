@@ -1,5 +1,5 @@
 using System;
-using Hexat;
+using StatusManager.Hexat;
 using MackySoft.Modiferty;
 using UniRx;
 

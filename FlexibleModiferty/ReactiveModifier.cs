@@ -1,5 +1,5 @@
 using MackySoft.Modiferty;
-using Hexat;
+using StatusManager.Hexat;
 using UnityEngine;
 using System;
 

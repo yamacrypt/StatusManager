@@ -1,6 +1,6 @@
 using System;
-using Hexat;
 using MackySoft.Modiferty;
+using StatusManager.Hexat;
 using UnityEngine;
 
 namespace StatusManager.FlexibleModiferty{
