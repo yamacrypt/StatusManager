@@ -21,10 +21,10 @@ namespace StatusManager{
                 ele.Dispose();
         }
     }
-    public abstract class StatusModifier<T> :IStatusModifier
-        where T:IStatusInt{
+    public abstract class StatusModifier :IStatusModifier{
         IModifier<int> linker;
-        public StatusModifier(InApplicableStatusInt status,Func<InApplicableStatusInt,IModifier<int>> linker){
+        public Type targetStatusType{get;private set;}
+        public StatusModifier(Type targetStatusType,InApplicableStatusInt status,Func<InApplicableStatusInt,IModifier<int>> linker){
             LinkObservable= (IStatusInt target) =>
             {
                 status.Link(target);
@@ -33,9 +33,11 @@ namespace StatusManager{
             {
                 status.UnLink(target);
             };
+            this.targetStatusType=targetStatusType;
             this.linker=linker(status);
         }
-        public StatusModifier(IModifier<int> modifier){
+        public StatusModifier(Type targetStatusType,IModifier<int> modifier){
+            this.targetStatusType=targetStatusType;
             this.linker=modifier;
         }
         Action<IStatusInt> LinkObservable;  
@@ -60,16 +62,24 @@ namespace StatusManager{
         {
 
             List<IDisposable> res=new List<IDisposable>();
-            var dis=_apply(holder,typeof(T));
+            var dis=_apply(holder,targetStatusType);
             res.Add(dis);
             if(LinkObservable!=null){
-                LinkObservable(holder.getStatus<T>());
-                res.Add(new Disposer(()=>UnLinkObservable(holder.getStatus(typeof(T)))));
+                LinkObservable(holder.getStatus(targetStatusType));
+                res.Add(new Disposer(()=>UnLinkObservable(holder.getStatus(targetStatusType))));
                 LinkObservable=null;
             }
             return new DisposableCollection(res);
         }
+    }
 
+    public abstract class StatusModifier<T> :StatusModifier, IStatusModifier
+        where T:IStatusInt{
+        IModifier<int> linker;
+        public StatusModifier(InApplicableStatusInt status,Func<InApplicableStatusInt,IModifier<int>> linker):base(typeof(T),status,linker){
+        }
+        public StatusModifier(IModifier<int> modifier):base(typeof(T),modifier){
+        }
     }
     public interface IStatusModifier{
         IDisposable apply(IStatusHolder holder);

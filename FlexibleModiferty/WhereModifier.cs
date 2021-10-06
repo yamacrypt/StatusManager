@@ -1,5 +1,4 @@
 using System;
-using MackySoft.Modiferty;
 using UniRx;
 
 namespace StatusManager.FlexibleModiferty{
@@ -22,6 +21,7 @@ namespace StatusManager.FlexibleModiferty{
 
         }
     }
+    
     public interface IWhereOperator{
         bool Satisfy();
     }

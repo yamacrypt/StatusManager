@@ -16,6 +16,7 @@ namespace StatusManager{
         IDisposable Modify(IModifier<T> linker);
         IModifiable<T> convert();
     }
+    public interface IStatusModifiableInt:IStatusModifiable<int>{}
     public interface IStatusInt:IReactiveStatus<int>,InApplicableStatusInt{}
     public interface InApplicableStatusInt:IReadOnlyStatusInt{
         bool Link(IReadOnlyReactiveStatus<int> linker);
@@ -48,7 +49,7 @@ namespace StatusManager{
         protected abstract IStatusModifiable<T> statusModifiable{get;}
         //bool isChanged=true;
 
-        public  abstract T Evaluate();
+        public  T Evaluate()=>statusModifiable.Evaluate();
        
         public T baseValue=>statusModifiable.baseValue;
 
